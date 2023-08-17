@@ -10,17 +10,17 @@ import { RickyAndMortyTitle, RickyLogo } from "../assets";
 
 const Navbar = () => {
   return (
-    <NavbarBase isBordered className="py-2">
-      <NavbarBrand>
+    <NavbarBase isBordered className="py-2 flex">
+      <NavbarBrand className="hidden sm:flex">
         <RickyLogo />
       </NavbarBrand>
-      <NavbarContent className="hidden sm:flex justify-start" justify="center">
+      <NavbarContent justify="center">
         <NavbarItem>
           <RickyAndMortyTitle className="hover:scale-110 transition-all" />
         </NavbarItem>
       </NavbarContent>
-      <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
+      <NavbarContent justify="end" className="hidden sm:flex">
+        <NavbarItem>
           <RickyLogo />
         </NavbarItem>
       </NavbarContent>

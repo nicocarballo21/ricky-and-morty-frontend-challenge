@@ -7,3 +7,7 @@
   color: CanvasText;
   color-scheme: dark;
 }
+
+body {
+  overflow-y: scroll;
+}
