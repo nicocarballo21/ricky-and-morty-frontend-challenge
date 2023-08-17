@@ -4,8 +4,7 @@ import Image from "next/image";
 
 type IconProps = {
   className?: string;
-  width?: number;
-  height?: number;
+  size?: number;
 };
 
 interface BaseIconProps extends IconProps {
@@ -14,18 +13,11 @@ interface BaseIconProps extends IconProps {
   priority?: boolean;
 }
 
-const BaseIcon = ({
-  width,
-  height,
-  className,
-  alt,
-  src,
-  priority,
-}: BaseIconProps) => {
+const BaseIcon = ({ size, className, alt, src, priority }: BaseIconProps) => {
   return (
     <Image
-      width={width}
-      height={height}
+      width={size}
+      style={{ height: "auto" }}
       src={src}
       alt={alt}
       className={className ?? ""}
@@ -34,31 +26,21 @@ const BaseIcon = ({
   );
 };
 
-export const RickyLogo = ({
-  width = 70,
-  height = 50,
-  className,
-}: IconProps) => {
+export const RickyLogo = ({ size = 70, className }: IconProps) => {
   return BaseIcon({
     src: RickyLogoSVG,
     alt: "Ricky Logo",
-    width,
-    height,
     className,
+    size,
   });
 };
 
-export const RickyAndMortyTitle = ({
-  width = 200,
-  height = 60,
-  className,
-}: IconProps) => {
+export const RickyAndMortyTitle = ({ size = 200, className }: IconProps) => {
   return BaseIcon({
     src: RickyAndMortySVG,
     alt: "Ricky and Morty Title Logo",
-    width,
-    height,
     className,
+    size,
     priority: true,
   });
 };

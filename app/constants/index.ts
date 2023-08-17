@@ -1,1 +1,1 @@
-export const CARD_SIZE = 200;
+export const BASE_URL_API = "https://rickandmortyapi.com/api";

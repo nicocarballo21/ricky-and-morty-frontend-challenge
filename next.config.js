@@ -2,7 +2,6 @@
 const nextConfig = {
   images: {
     domains: ["rickandmortyapi.com"],
-    allowFutureImage: true,
   },
 };
 
