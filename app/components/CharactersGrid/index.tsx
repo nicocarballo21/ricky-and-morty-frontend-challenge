@@ -1,13 +1,6 @@
 "use client";
-import { Character } from "@/app/apiTypes";
 import CharacterCard from "../CharacterCard";
-import { BoxId } from "@/app/context/types.d";
-import useGetCharacters from "@/app/hooks/useGetCharacters";
-
-interface CharactersGridProps {
-  boxId: BoxId;
-  characters: Character[];
-}
+import { CharactersGridProps } from "./types.d";
 
 const CharactersGrid = ({ boxId, characters }: CharactersGridProps) => {
   return (
@@ -23,11 +16,7 @@ const CharactersGrid = ({ boxId, characters }: CharactersGridProps) => {
     `}
     >
       {characters?.map(character => (
-        <CharacterCard
-          boxId={character.id}
-          key={character.id}
-          character={character}
-        />
+        <CharacterCard boxId={boxId} key={character.id} character={character} />
       ))}
     </div>
   );

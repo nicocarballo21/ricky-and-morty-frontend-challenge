@@ -36,7 +36,7 @@ const CharacterCard = ({ character, boxId }: CharacterCardProps) => {
     <Card
       className={`
       min-w-[120px] md:min-w-[150px] lg:min-w-[200px] min-h-[200px] 
-      ${isSelected && "scale-125 z-50 opacity-100"}
+      ${isSelected && "scale-125 z-20 opacity-100"}
       ${showOpacity && "scale-100 z-0 opacity-40"}
       `}
       shadow="sm"
@@ -49,6 +49,7 @@ const CharacterCard = ({ character, boxId }: CharacterCardProps) => {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           alt={name}
           src={image}
+          priority
           className="object-cover hover:scale-110 transition-all min-w-[100px] min-h-[100px]"
         />
       </CardBody>

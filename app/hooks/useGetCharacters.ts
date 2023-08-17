@@ -3,6 +3,12 @@ import { useInfiniteQuery, useQuery } from "react-query";
 import { ApiResponse, Character } from "../apiTypes";
 import { useState } from "react";
 
+interface GetCharactersParams {
+  nextCursor?: string;
+  prevCursor?: string;
+  characters: Character[];
+}
+
 const getCharacters = async (page: string) => {
   const res = await fetch(page);
 
@@ -16,12 +22,6 @@ const getCharacters = async (page: string) => {
     prevCursor: data?.info?.prev || "",
   };
 };
-
-interface GetCharactersParams {
-  nextCursor?: string;
-  prevCursor?: string;
-  characters: Character[];
-}
 
 const useGetCharacters = () => {
   const [currentPage, setCurrentPage] = useState(`${BASE_URL_API}/character`);
@@ -47,8 +47,7 @@ const useGetCharacters = () => {
     setCurrentPage(`${BASE_URL_API}/character/?page=${page}`);
   };
 
-  const currentPageNumber = Number(currentPage.split("=")[1]) || 1;
-  console.log("currentPageNumber", currentPageNumber);
+  const currentPageNumber = Number(currentPage.split("=")[1]);
 
   return {
     isError,
