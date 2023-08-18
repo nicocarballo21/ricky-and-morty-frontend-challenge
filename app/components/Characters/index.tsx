@@ -27,7 +27,7 @@ const Characters = () => {
   }, [currentPageNumber, nextPage, prevPage, setPage]);
 
   return (
-    <div className="min-h-screen">
+    <div className="h-full">
       {Controls}
       <Divider />
       <div className="grid grid-cols-2 h-full rounded-lg w-full gap-5 p-3">
