@@ -1,7 +1,9 @@
 import { BASE_URL_API } from "../constants";
-import { useInfiniteQuery, useQuery } from "react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { ApiResponse, Character } from "../apiTypes";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { CharactersContext } from "../context/charactersContext";
+import { BoxId } from "../context/types.d";
 
 interface GetCharactersParams {
   nextCursor?: string;
@@ -33,6 +35,7 @@ const getCharacters = async (page: string) => {
 
 const useGetCharacters = () => {
   const [currentPage, setCurrentPage] = useState(`${BASE_URL_API}/character`);
+  const { resetCharacterSelection } = useContext(CharactersContext);
 
   const { isError, data, error, isLoading } = useQuery<GetCharactersParams>({
     queryKey: ["characters", currentPage],
@@ -44,16 +47,24 @@ const useGetCharacters = () => {
 
   const typedError = error as Error;
 
+  const resetBothCharacters = () => {
+    resetCharacterSelection(BoxId.CHARACTER_ONE);
+    resetCharacterSelection(BoxId.CHARACTER_TWO);
+  };
+
   const nextPage = () => {
     setCurrentPage(data?.nextCursor || "");
+    resetBothCharacters();
   };
 
   const prevPage = () => {
     setCurrentPage(data?.prevCursor || "");
+    resetBothCharacters();
   };
 
   const setPage = (page: number) => {
     setCurrentPage(`${BASE_URL_API}/character/?page=${page.toString()}`);
+    resetBothCharacters();
   };
 
   const currentPageNumber = Number(currentPage.split("=")[1]);

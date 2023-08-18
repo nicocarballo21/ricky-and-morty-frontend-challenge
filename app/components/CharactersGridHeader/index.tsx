@@ -17,8 +17,10 @@ const CharactersGridHeader = ({ boxId }: CharactersGridHeaderProps) => {
       flex
       items-center
       gap-3
-      mb-3 
-      ${boxId === CHARACTER_TWO && "justify-start flex-row-reverse"}
+      mb-3
+      flex-col
+      md:flex-row 
+      ${boxId === CHARACTER_TWO && "justify-end flex-row-reverse"}
       `}
     >
       <h1 className="text-2xl">{`${title}`}</h1>

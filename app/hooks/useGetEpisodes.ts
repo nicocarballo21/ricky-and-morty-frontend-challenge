@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { Episode } from "../apiTypes";
 import { BoxId } from "../context/types";
 
@@ -20,15 +20,26 @@ const getEpisodes = async (episodesURLS: string[]) => {
   }
 };
 
-const useGetEpisodes = (episodesURLS: string[], boxId: BoxId) => {
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["episodes", boxId],
-    queryFn: () => getEpisodes(episodesURLS),
+interface useGetEpisodesParams {
+  episodesURLS: string[];
+  boxId: BoxId;
+  characterID: string;
+}
 
+const useGetEpisodes = ({
+  episodesURLS,
+  boxId,
+  characterID,
+}: useGetEpisodesParams) => {
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["episodes", characterID, boxId],
+    queryFn: () => getEpisodes(episodesURLS),
     refetchOnWindowFocus: false,
   });
 
-  return { episodes: data, isLoading, isError, error };
+  const typedError = error as Error;
+
+  return { episodes: data, isLoading, isError, error: typedError?.message };
 };
 
 export default useGetEpisodes;

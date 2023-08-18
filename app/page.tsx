@@ -18,13 +18,13 @@ const Home = () => {
         {isError ? <ErrorBadge error={error} /> : <Characters />}
       </Skeleton>
 
-      {characterOne && characterTwo ? (
-        <div className="grid grid-cols-3 h-fit gap-5 p-4 bg-emerald-500 rounded-xl">
-          <Episodes boxId={BoxId.CHARACTER_ONE} />
-          <div className="bg-red-400">1</div>
-          <Episodes boxId={BoxId.CHARACTER_TWO} />
-        </div>
-      ) : null}
+      {/* {!characterOne && !characterTwo ? ( */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 h-fit gap-5 p-4 bg-emerald-500 rounded-xl">
+        <Episodes boxId={BoxId.CHARACTER_ONE} />
+        <div className="bg-red-400">1</div>
+        <Episodes boxId={BoxId.CHARACTER_TWO} />
+      </div>
+      {/* ) : null} */}
     </section>
   );
 };

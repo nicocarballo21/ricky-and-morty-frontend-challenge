@@ -35,7 +35,7 @@ const CharacterCard = ({ character, boxId }: CharacterCardProps) => {
   return (
     <Card
       className={`
-      min-w-[120px] md:min-w-[150px] lg:min-w-[200px] min-h-[200px] 
+      min-w-full sm:min-w-[200px] min-h-[200px] 
       ${isSelected && "scale-125 z-20 opacity-100"}
       ${showOpacity && "scale-100 z-0 opacity-40"}
       `}
