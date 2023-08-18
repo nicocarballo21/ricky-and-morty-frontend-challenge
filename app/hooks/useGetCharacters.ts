@@ -10,22 +10,31 @@ interface GetCharactersParams {
 }
 
 const getCharacters = async (page: string) => {
-  const res = await fetch(page);
+  try {
+    const res = await fetch(page);
 
-  if (!res.ok) throw new Error("Error on get characters");
+    if (!res.ok) throw new Error("Error on get characters");
 
-  const data: ApiResponse = await res.json();
+    const data: ApiResponse = await res.json();
 
-  return {
-    characters: data.results,
-    nextCursor: data?.info?.next || "",
-    prevCursor: data?.info?.prev || "",
-  };
+    return {
+      characters: data.results,
+      nextCursor: data?.info?.next || "",
+      prevCursor: data?.info?.prev || "",
+    };
+  } catch (error) {
+    return {
+      characters: [],
+      nextCursor: "",
+      prevCursor: "",
+    };
+  }
 };
 
 const useGetCharacters = () => {
   const [currentPage, setCurrentPage] = useState(`${BASE_URL_API}/character`);
-  const { isError, data, error, isFetching } = useQuery<GetCharactersParams>({
+
+  const { isError, data, error, isLoading } = useQuery<GetCharactersParams>({
     queryKey: ["characters", currentPage],
     queryFn: () => getCharacters(currentPage),
     keepPreviousData: true,
@@ -44,14 +53,14 @@ const useGetCharacters = () => {
   };
 
   const setPage = (page: number) => {
-    setCurrentPage(`${BASE_URL_API}/character/?page=${page}`);
+    setCurrentPage(`${BASE_URL_API}/character/?page=${page.toString()}`);
   };
 
   const currentPageNumber = Number(currentPage.split("=")[1]);
 
   return {
     isError,
-    isFetching,
+    isLoading,
     setPage,
     currentPageNumber,
     error: typedError?.message || "",

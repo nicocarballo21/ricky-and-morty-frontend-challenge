@@ -24,8 +24,7 @@ const Characters = () => {
         <Button onClick={nextPage}>Next</Button>
       </div>
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPageNumber]);
+  }, [currentPageNumber, nextPage, prevPage, setPage]);
 
   return (
     <>
