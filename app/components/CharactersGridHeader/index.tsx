@@ -19,12 +19,15 @@ const CharactersGridHeader = ({ boxId }: CharactersGridHeaderProps) => {
       gap-3
       mb-3
       flex-col
-      md:flex-row 
-      ${boxId === CHARACTER_TWO && "justify-end flex-row-reverse"}
+      ${boxId === CHARACTER_TWO ? "md:flex-row-reverse" : "md:flex-row"}
+      ${boxId === CHARACTER_TWO && "justify-start flex-row-reverse"}
       `}
     >
-      <h1 className="text-2xl">{`${title}`}</h1>
-      <Button onClick={onReset} variant="bordered">{`Reset ${title}`}</Button>
+      <h1 className="text-lg lg:text-xl 2xl:text-2xl">{title}</h1>
+      <Button onClick={onReset} variant="bordered">
+        <p>Reset</p>
+        <p className="hidden sm:block">{title}</p>
+      </Button>
     </div>
   );
 };

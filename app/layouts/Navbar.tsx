@@ -10,7 +10,7 @@ import { RickyAndMortyTitle, RickyLogo } from "../assets";
 
 const Navbar = () => {
   return (
-    <NavbarBase isBordered className="py-2 flex z-[50]">
+    <NavbarBase isBordered className="py-2 flex">
       <NavbarBrand className="hidden sm:flex">
         <RickyLogo />
       </NavbarBrand>

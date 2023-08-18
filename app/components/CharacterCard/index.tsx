@@ -36,7 +36,7 @@ const CharacterCard = ({ character, boxId }: CharacterCardProps) => {
     <Card
       className={`
       min-w-full sm:min-w-[200px] min-h-[200px] 
-      ${isSelected && "scale-125 z-20 opacity-100"}
+      ${isSelected && "scale-110 xl:scale-125 z-20 opacity-100"}
       ${showOpacity && "scale-100 z-0 opacity-40"}
       `}
       shadow="sm"
@@ -53,7 +53,7 @@ const CharacterCard = ({ character, boxId }: CharacterCardProps) => {
           className="object-cover hover:scale-110 transition-all min-w-[100px] min-h-[100px]"
         />
       </CardBody>
-      <CardFooter className="text-small justify-between">
+      <CardFooter className="text-small p-1 flex flex-col sm:flex-row sm:p-3 justify-between">
         <b>{species}</b>
         <p className="text-sm text-gray-400">{status}</p>
       </CardFooter>

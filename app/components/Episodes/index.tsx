@@ -1,81 +1,68 @@
 import { CharactersContext } from "@/app/context/charactersContext";
+import { useContext } from "react";
 import { BoxId } from "@/app/context/types.d";
 import useGetEpisodes from "@/app/hooks/useGetEpisodes";
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Divider,
-  Link,
-  Skeleton,
-} from "@nextui-org/react";
-import { useContext } from "react";
-import ErrorBadge from "../ErrorBagde";
-
-interface EpisodesProps {
-  boxId: BoxId;
-}
+import EpisodeCard from "../EpisodesCard";
+import useGetSharedEpisodes from "@/app/hooks/useGetSharesEpisodes";
 
 const { CHARACTER_ONE, CHARACTER_TWO } = BoxId;
 
-const Episodes = ({ boxId }: EpisodesProps) => {
+const Episodes = () => {
   const { characterOne, characterTwo } = useContext(CharactersContext);
 
-  const episodesURLS: string[] =
-    boxId === CHARACTER_ONE ? characterOne?.episode : characterTwo?.episode;
-
-  const characterID =
-    boxId === CHARACTER_ONE ? characterOne?.id : characterTwo?.id;
-
-  const title = boxId === CHARACTER_ONE ? "Character #1" : "Character #2";
-
-  const { episodes, isError, isLoading, error } = useGetEpisodes({
-    episodesURLS,
-    boxId,
-    characterID,
+  const {
+    episodes: characterOneEpisodes,
+    isError: isErrorOne,
+    error: errorOne,
+    isLoading: isLoadingOne,
+  } = useGetEpisodes({
+    episodesURLS: characterOne?.episode,
+    boxId: CHARACTER_ONE,
   });
 
-  const ListContent = () => {
-    if (isLoading) {
-      return <Skeleton className="rounded-xl h-full" isLoaded={!isLoading} />;
-    }
+  const {
+    episodes: characterTwoEpisodes,
+    isLoading: isLoadingTwo,
+    isError: isErrorTwo,
+    error: errorTwo,
+  } = useGetEpisodes({
+    episodesURLS: characterTwo?.episode,
+    boxId: CHARACTER_TWO,
+  });
 
-    if (isError) {
-      return <ErrorBadge error={error} />;
-    }
-
-    return (
-      <ul className="h-full flex flex-col gap-3 p-3 w-full">
-        {episodes?.map(item => (
-          <li key={item.id}>
-            <Card fullWidth>
-              <CardHeader className="flex gap-3 w-full">
-                <p className="text-lg">Episode: {item.episode}</p>
-              </CardHeader>
-              <Divider />
-              <CardBody className="px-3 py-2">
-                <p>Episode Name: {item.name}</p>
-                <p>Air Date: {item.air_date}</p>
-              </CardBody>
-              <Divider />
-            </Card>
-          </li>
-        ))}
-      </ul>
-    );
-  };
+  const sharedEpisodes = useGetSharedEpisodes(
+    characterOneEpisodes,
+    characterTwoEpisodes,
+  );
 
   return (
-    <div className="bg-emerald-600 rounded-x p-3">
-      <div className="h-10">
-        <p className="text-2xl">{`${title} - Only Episodies`}</p>
-      </div>
-      <Divider />
-      <div className="h-[400px] overflow-y-auto">
-        <ListContent />
-      </div>
-    </div>
+    <>
+      {characterOne && characterTwo ? (
+        <div className="grid grid-cols-1 lg:grid-cols-3 h-fit gap-5 p-4 bg-emerald-500 rounded-xl">
+          <EpisodeCard
+            title="Character #1 - Only Episodes"
+            episodes={characterOneEpisodes}
+            isError={isErrorOne}
+            error={errorOne}
+            isLoading={isLoadingOne}
+          />
+          <EpisodeCard
+            title="Shared Episodes"
+            episodes={sharedEpisodes}
+            isError={isErrorOne && isErrorTwo}
+            error="Error finding shared episodes."
+            isLoading={isLoadingOne && isLoadingTwo}
+          />
+          <EpisodeCard
+            title="Character #2 - Only Episodes"
+            episodes={characterTwoEpisodes}
+            isError={isErrorTwo}
+            error={errorTwo}
+            isLoading={isLoadingTwo}
+          />
+        </div>
+      ) : null}
+    </>
   );
 };
 

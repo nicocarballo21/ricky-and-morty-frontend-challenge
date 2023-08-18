@@ -1,15 +1,10 @@
 import { BASE_URL_API } from "../constants";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { ApiResponse, Character } from "../apiTypes";
 import { useContext, useState } from "react";
 import { CharactersContext } from "../context/charactersContext";
 import { BoxId } from "../context/types.d";
-
-interface GetCharactersParams {
-  nextCursor?: string;
-  prevCursor?: string;
-  characters: Character[];
-}
+import { GetCharactersParams } from "./types.d";
 
 const getCharacters = async (page: string) => {
   try {

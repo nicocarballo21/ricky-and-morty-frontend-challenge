@@ -1,36 +1,40 @@
 import { useQuery } from "@tanstack/react-query";
 import { Episode } from "../apiTypes";
-import { BoxId } from "../context/types";
+import { useGetEpisodesParams } from "./types.d";
+import { useContext } from "react";
+import { CharactersContext } from "../context/charactersContext";
+import { BoxId } from "../context/types.d";
 
 const getEpisodes = async (episodesURLS: string[]) => {
   try {
-    const calls = episodesURLS.map(url => fetch(url));
+    if (!episodesURLS) return [] as Episode[];
+    const calls = episodesURLS?.map(url => fetch(url));
     const responses = await Promise.all(calls);
     const error = responses.find(res => !res.ok);
 
     if (error) {
-      throw new Error("Error on get episodes");
+      console.log(error);
+
+      throw new Error("Error on get episodes.");
     }
 
     const data: Episode[] = await Promise.all(responses.map(res => res.json()));
 
     return data;
   } catch (error) {
-    throw new Error("Error on get episodes");
+    console.log(error, "catch");
+
+    throw new Error("Error on get episodes.");
   }
 };
 
-interface useGetEpisodesParams {
-  episodesURLS: string[];
-  boxId: BoxId;
-  characterID: string;
-}
+const { CHARACTER_ONE } = BoxId;
+const useGetEpisodes = ({ episodesURLS, boxId }: useGetEpisodesParams) => {
+  const { characterOne, characterTwo } = useContext(CharactersContext);
 
-const useGetEpisodes = ({
-  episodesURLS,
-  boxId,
-  characterID,
-}: useGetEpisodesParams) => {
+  const characterID =
+    boxId === CHARACTER_ONE ? characterOne?.id : characterTwo?.id;
+
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["episodes", characterID, boxId],
     queryFn: () => getEpisodes(episodesURLS),
@@ -39,7 +43,12 @@ const useGetEpisodes = ({
 
   const typedError = error as Error;
 
-  return { episodes: data, isLoading, isError, error: typedError?.message };
+  return {
+    episodes: data || [],
+    isLoading,
+    isError,
+    error: typedError?.message,
+  };
 };
 
 export default useGetEpisodes;

@@ -13,7 +13,7 @@ const Characters = () => {
 
   const Controls = useMemo(() => {
     return (
-      <div className="flex gap-3 px-3 py-2 justify-center items-center">
+      <div className="flex flex-col md:flex-row gap-3 px-3 py-2 justify-center items-center">
         <Button onClick={prevPage}>Previus</Button>
         <Pagination
           color="success"
@@ -27,11 +27,11 @@ const Characters = () => {
   }, [currentPageNumber, nextPage, prevPage, setPage]);
 
   return (
-    <>
+    <div className="min-h-screen">
       {Controls}
       <Divider />
-      <div className="grid grid-cols-2 rounded-lg w-full gap-5 p-3">
-        <div>
+      <div className="grid grid-cols-2 h-full rounded-lg w-full gap-5 p-3">
+        <div className="h-full">
           <CharactersGridHeader boxId={CHARACTER_ONE} />
           <CharactersGrid
             characters={characters.slice(0, 10)}
@@ -39,7 +39,7 @@ const Characters = () => {
           />
         </div>
 
-        <div>
+        <div className="h-full">
           <CharactersGridHeader boxId={CHARACTER_TWO} />
           <CharactersGrid
             characters={characters.slice(10, 20)}
@@ -47,7 +47,7 @@ const Characters = () => {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
