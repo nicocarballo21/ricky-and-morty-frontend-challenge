@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import Providers from "./providers";
 import Navbar from "./layouts/Navbar";
+import Tutorial from "./components/Tutorial";
 
 export const metadata: Metadata = {
   title: "Ricky & Morty",
@@ -19,6 +20,7 @@ export default function RootLayout({
         <Providers>
           <Navbar />
           <main>{children}</main>
+          <Tutorial />
         </Providers>
       </body>
     </html>

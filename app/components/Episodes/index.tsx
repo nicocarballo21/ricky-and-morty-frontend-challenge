@@ -38,7 +38,7 @@ const Episodes = () => {
   return (
     <>
       {characterOne && characterTwo ? (
-        <div className="grid grid-cols-1 lg:grid-cols-3 h-fit gap-5 p-4 bg-emerald-500 rounded-xl">
+        <div className="grid grid-cols-1 lg:grid-cols-3 h-fit gap-5 p-4 bg-zinc-800 rounded-xl">
           <EpisodeCard
             title="Character #1 - Only Episodes"
             episodes={characterOneEpisodes}

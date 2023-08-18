@@ -17,7 +17,7 @@ const BaseIcon = ({ size, className, alt, src, priority }: BaseIconProps) => {
   return (
     <Image
       width={size}
-      style={{ height: "auto" }}
+      height={size}
       src={src}
       alt={alt}
       className={className ?? ""}

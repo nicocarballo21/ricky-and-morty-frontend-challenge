@@ -8,6 +8,7 @@ This is a Next.js project that utilizes the [Rick and Morty API](https://rickand
 
 - [Demo](#demo)
 - [Features](#features)
+- [Extras](#extras)
 - [Getting Started](#getting-started)
   - [Requirements](#requirements)
   - [Installation](#installation)
@@ -23,6 +24,10 @@ This is a Next.js project that utilizes the [Rick and Morty API](https://rickand
 - View all characters.
 - Select two characters to view the episodes of each one and the shared episodes between them.
 - Responsive design for various screen sizes.
+
+## Extras
+
+- Tutorial explaining how to use the app once the user arrive to the page. The user desicion is saved for the future.
 
 ## Getting Started
 

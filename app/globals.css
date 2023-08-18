@@ -9,7 +9,7 @@
 }
 
 body {
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 /* ===== Scrollbar CSS ===== */
@@ -26,7 +26,6 @@ body {
 
 *::-webkit-scrollbar-track {
   background: #000000;
-  border-radius: 10px;
 }
 
 *::-webkit-scrollbar-thumb {

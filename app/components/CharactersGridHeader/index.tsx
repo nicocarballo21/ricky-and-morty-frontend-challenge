@@ -24,7 +24,7 @@ const CharactersGridHeader = ({ boxId }: CharactersGridHeaderProps) => {
       `}
     >
       <h1 className="text-lg lg:text-xl 2xl:text-2xl">{title}</h1>
-      <Button onClick={onReset} variant="bordered">
+      <Button className="bg-emerald-500" onClick={onReset} variant="shadow">
         <p>Reset</p>
         <p className="hidden sm:block">{title}</p>
       </Button>

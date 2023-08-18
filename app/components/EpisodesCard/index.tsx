@@ -36,7 +36,7 @@ const EpisodeCard = ({
       <ul className="h-full flex flex-col gap-3 py-3 px-2 w-full">
         {episodes?.map(item => (
           <li key={item.id}>
-            <Card fullWidth>
+            <Card fullWidth className="bg-zinc-800">
               <CardHeader className="flex gap-3 w-full">
                 <p className="text-sm md:text-base lg:text-xl">
                   Episode: {item.episode}
@@ -63,7 +63,7 @@ const EpisodeCard = ({
   };
 
   return (
-    <div className="bg-emerald-600 rounded-xl shadow-xl p-3">
+    <div className="bg-emerald-500 rounded-xl shadow-xl p-3">
       <div className="pb-2">
         <p className="text-sm md:text-lg xl:text-xl">{title}</p>
       </div>
