@@ -2,7 +2,11 @@ import "./globals.css";
 import type { Metadata } from "next";
 import Providers from "./providers";
 import Navbar from "./layouts/Navbar";
-import Tutorial from "./components/Tutorial";
+import dinamic from "next/dynamic";
+
+const Tutorial = dinamic(() => import("./components/Tutorial"), {
+  ssr: false,
+});
 
 export const metadata: Metadata = {
   title: "Ricky & Morty",

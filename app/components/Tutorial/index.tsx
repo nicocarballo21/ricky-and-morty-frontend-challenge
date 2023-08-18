@@ -1,14 +1,19 @@
 "use client";
 import { Button, Divider } from "@nextui-org/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 const Tutorial = () => {
   const [step, setStep] = useState(1);
   const [hasSeenTutorial, setHasSeenTutorial] = useState(() => {
-    const hasSeenTutorial = localStorage.getItem("tutorial");
+    const hasSeenTutorial = window.localStorage.getItem("tutorial");
     return hasSeenTutorial === "true";
   });
+
+  useEffect(() => {
+    const hasSeenTutorial = window.localStorage.getItem("tutorial") === "true";
+    setHasSeenTutorial(hasSeenTutorial);
+  }, []);
 
   if (hasSeenTutorial) return null;
 
@@ -70,7 +75,7 @@ const Tutorial = () => {
 
   const onNext = () => {
     if (step >= 2) {
-      localStorage.setItem("tutorial", "true");
+      window.localStorage.setItem("tutorial", "true");
       setHasSeenTutorial(true);
       return;
     }
@@ -92,7 +97,7 @@ const Tutorial = () => {
 
   const handleClose = () => {
     setHasSeenTutorial(true);
-    localStorage.setItem("tutorial", "true");
+    window.localStorage.setItem("tutorial", "true");
   };
 
   return (
